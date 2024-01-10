@@ -80,9 +80,9 @@ public class Calendar0 {
 			  break;
 		}
 		if(isLeapYear(year) && month ==2)
-			days = 28;
-		if((!isLeapYear(year)) && month ==2)
 			days = 29;
+		if((!isLeapYear(year)) && month ==2)
+			days = 28;
 
 		return days;
 	}
