@@ -12,6 +12,29 @@ public class UniqueChars {
      */
     public static String uniqueChars(String s) {
         // Replace the following statement with your code
-        return null;
+        /**
+         * string letters, if letter in length i deslnt exist in letters, add it to letters
+         * and add it to new string
+         * if it exists, dont add it to new string
+         * return new string
+         */
+
+         String letters = "";
+         String newString = "";
+
+         for(int i = 0; i < s.length(); i++)
+         {  
+            char temp = s.charAt(i);
+            if(letters.indexOf(temp) == -1 && temp != ' ')
+            {
+                letters += temp;
+                newString += temp;
+            }
+            else if(temp == ' ')
+                    newString+= ' ';
+         }
+
+        return newString;
+
     }
 }

@@ -16,6 +16,8 @@ public class LoanCalc {
 		double loan = Double.parseDouble(args[0]);
 		double rate = Double.parseDouble(args[1]);
 		int n = Integer.parseInt(args[2]);
+		//double paymentTest = Double.parseDouble(args[3]);
+
 		System.out.println("Loan sum = " + loan + ", interest rate = " + rate + "%, periods = " + n);
 		
 		// Computes the periodical payment using brute force search
@@ -29,6 +31,9 @@ public class LoanCalc {
 		System.out.printf("%.2f", bisectionSolver(loan, rate, n, epsilon));
 		System.out.println();
 		System.out.println("number of iterations: " + iterationCounter);
+
+		// //computes end balance - I ADDED
+		// System.out.println("end balance: " + endBalance(loan, rate, n, paymentTest));
 	}
 	
 	/**
@@ -40,7 +45,14 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
     	// Replace the following statement with your code
-    	return 0;
+		double increment = 0.00001;
+		double g = loan/n;
+		while(endBalance(loan, rate, n, g)>= epsilon)
+		{
+			g += increment;
+			iterationCounter++;
+		}
+    	return g;
     }
     
     /**
@@ -51,8 +63,18 @@ public class LoanCalc {
 	*/
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-    	// Replace the following statement with your code
-    	return 0;
+		double L = loan / n , H = loan;
+		double g = (L + H) / 2.0;
+		iterationCounter = 0;
+		while ((H - L) >= epsilon) {
+			if ((endBalance(loan, rate, n, g)  * endBalance(loan, rate, n, L)) > 0)
+				L = g;
+			else
+				H = g;
+			g = (L + H) / 2;
+			iterationCounter++;
+		}
+    	return g;
     }
 	
 	/**
@@ -61,6 +83,11 @@ public class LoanCalc {
 	*/
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// Replace the following statement with your code
-    	return 0;
+		double balance = loan;
+		for(int i = 0; i < n ; i++ )
+		{
+			balance = (balance - payment)* (1+ rate/100);
+		}
+    	return balance;
 	}
 }

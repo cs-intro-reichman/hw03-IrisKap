@@ -1,7 +1,7 @@
 /** 
  * Prints the calendars of all the years in the 20th century.
  */
-public class Calendar1 {	
+public class Calendar {	
     // Starting the calendar on 1/1/1900
 	static int dayOfMonth = 1;   
 	static int month = 1;
@@ -19,9 +19,31 @@ public class Calendar1 {
 	    // The following variable, used for debugging purposes, counts how many days were advanced so far.
 	    int debugDaysCounter = 0; 
 		int specialDays = 0;
+        int givenYear = Integer.parseInt(args[0]);
 	    //// Write the necessary initialization code, and replace the condition
 	    //// of the while loop with the necessary condition 
-	 	while (!(year == 1999 && dayOfMonth == 31 && month == 12)) {
+	 	while (!(year == givenYear && dayOfMonth == 1 && month == 1)) {
+
+			// if(dayOfWeek ==1){
+			// 	System.out.println(dayOfMonth + "/" + month + "/" + year + " Sunday");
+			// 	if(dayOfMonth ==1)
+			// 		specialDays++;
+
+			// }
+
+
+			// else System.out.println(dayOfMonth + "/" + month + "/" + year);	
+	 		advance();
+	 		debugDaysCounter++;
+	 		//// If you want to stop the loop after n days, replace the condition of the
+	 		//// if statement with the condition (debugDaysCounter == n)
+	 		// if (debugDaysCounter == 365) { 
+	 		// 	break;
+	 		// }
+        }
+
+
+        while (!(year == givenYear+1 && dayOfMonth == 1 && month == 1)) {
 
 			if(dayOfWeek ==1){
 				System.out.println(dayOfMonth + "/" + month + "/" + year + " Sunday");
@@ -36,18 +58,19 @@ public class Calendar1 {
 	 		debugDaysCounter++;
 	 		//// If you want to stop the loop after n days, replace the condition of the
 	 		//// if statement with the condition (debugDaysCounter == n)
-	 		if (debugDaysCounter == 700) { 
-	 			break;
-	 		}
+	 		// if (debugDaysCounter == 365) { 
+	 		// 	break;
+	 		// }
         }
-		System.out.println("During the 20th century, " + specialDays + " Sundays fell on the first day of the month");	
+
+		//System.out.println("During the 20th century, " + specialDays + " Sundays fell on the first day of the month");	
 	 	
 	 }
 	
 	 // Advances the date (day, month, year) and the day-of-the-week.
 	 // If the month changes, sets the number of days in this month.
 	 // Side effects: changes the static variables dayOfMonth, month, year, dayOfWeek, nDaysInMonth.
-	 private static void advance() {
+	  private static void advance() {
 		boolean lastDayOfMonth = (dayOfMonth == nDaysInMonth(month, year));
 		boolean lastDayOfYear = (month ==12) && (dayOfMonth ==31);
 		if(lastDayOfYear){
